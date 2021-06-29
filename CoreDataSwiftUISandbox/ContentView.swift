@@ -8,6 +8,10 @@
 import SwiftUI
 import CoreData
 
+struct Student: Hashable {
+    var name: String
+}
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -15,23 +19,37 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
+    let students = [Student(name: "Harry Potter"), Student(name: "Hermoine Granger"), Student(name: "Ron Weasely")]
 
     var body: some View {
-        List {
-            ForEach(items) { item in
-                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-            }
-            .onDelete(perform: deleteItems)
+        List (students, id:\.self) { student in
+            Text(student.name)
         }
-        .toolbar {
-            #if os(iOS)
-            EditButton()
-            #endif
-
-            Button(action: addItem) {
-                Label("Add Item", systemImage: "plus")
-            }
-        }
+        /*
+         Although calculating the same hash for an object twice in a row should return the same value, calculating it between two runs of your app – i.e., calculating the hash, quitting the app, relaunching, then calculating the hash again – can return different values.
+         */
+        
+//        List {
+//            // Swift computes hash value of a struct and uses that for id through \.self
+//            ForEach([2, 3, 5, 6, 8, 10], id:\.self) {
+//                Text("\($0)")
+//            }
+//        }
+//        List {
+//            ForEach(items) { item in
+//                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+//            }
+//            .onDelete(perform: deleteItems)
+//        }
+//        .toolbar {
+//            #if os(iOS)
+//            EditButton()
+//            #endif
+//
+//            Button(action: addItem) {
+//                Label("Add Item", systemImage: "plus")
+//            }
+//        }
     }
 
     private func addItem() {
