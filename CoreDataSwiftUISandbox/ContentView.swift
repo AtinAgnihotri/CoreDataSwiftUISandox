@@ -16,14 +16,21 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var items: FetchedResults<Movie>
     let students = [Student(name: "Harry Potter"), Student(name: "Hermoine Granger"), Student(name: "Ron Weasely")]
 
     var body: some View {
-        List (students, id:\.self) { student in
-            Text(student.name)
+        VStack {
+            List (students, id:\.self) { student in
+                Text(student.name)
+            }
+            Button("Save") {
+                if self.viewContext.hasChanges {
+                    try? self.viewContext.save()
+                }
+            }
         }
         /*
          Although calculating the same hash for an object twice in a row should return the same value, calculating it between two runs of your app – i.e., calculating the hash, quitting the app, relaunching, then calculating the hash again – can return different values.
@@ -51,7 +58,8 @@ struct ContentView: View {
 //            }
 //        }
     }
-
+    
+    /*
     private func addItem() {
         withAnimation {
             let newItem = Item(context: viewContext)
@@ -82,6 +90,7 @@ struct ContentView: View {
             }
         }
     }
+ */
 }
 
 private let itemFormatter: DateFormatter = {
