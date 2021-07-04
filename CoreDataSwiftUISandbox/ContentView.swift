@@ -15,20 +15,42 @@ struct Student: Hashable {
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @FetchRequest(entity: Wizard.entity(),
+    @FetchRequest(entity: Ship.entity(),
         sortDescriptors: [],
+//        predicate: NSPredicate(format: "universe == 'Expanse'"),
+//        predicate: NSPredicate(format: "universe==%@", "Mass Effect", "Expanse"),
+        predicate: NSPredicate(format: "universe in %@", ["Mass Effect", "Expanse"]),
+//        predicate: NSPredicate(format: "name BEGINSWITH %@", "S"),
+//        predicate: NSPredicate(format: "name BEGINSWITH[c] %@", "S"),
+//        predicate: NSPredicate(format: "NOT name BEGINSWITH %@", "S"),
+        //CONTAINS[c]
         animation: .default)
-    private var wizards: FetchedResults<Wizard>
+    private var ships: FetchedResults<Ship>
     let students = [Student(name: "Harry Potter"), Student(name: "Hermoine Granger"), Student(name: "Ron Weasely")]
 
     var body: some View {
         VStack {
-            List (wizards, id:\.self) { wizard in
-                Text(wizard.name ?? "Unknown")
+            List (ships, id:\.self) { ship in
+                Text(ship.name ?? "Unknown Ship")
             }
-            Button("Add") {
-                let wizard = Wizard(context: viewContext)
-                wizard.name = "Harry Potter"
+            Button("Add Examples") {
+                let ship1 = Ship(context: viewContext)
+                ship1.name = "SSV Normandy SR-1"
+                ship1.universe = "Mass Effect"
+                
+                let ship2 = Ship(context: viewContext)
+                ship2.name = "Rocinante"
+                ship2.universe = "Expanse"
+                
+                let ship3 = Ship(context: viewContext)
+                ship3.name = "Millenium Falcon"
+                ship3.universe = "Star Wars"
+                
+                let ship4 = Ship(context: viewContext)
+                ship4.name = "Starship Enterprise"
+                ship4.universe = "Star Wars"
+                
+                try? self.viewContext.save()
             }
             Button("Save") {
                 do {
