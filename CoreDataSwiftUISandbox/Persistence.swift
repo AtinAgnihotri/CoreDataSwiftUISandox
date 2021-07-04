@@ -14,10 +14,8 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newItem = Movie(context: viewContext)
-            newItem.director = ""
-            newItem.title = ""
-            newItem.date = Int16(0)
+            let newItem = Wizard(context: viewContext)
+            newItem.name = ""
         }
         do {
             try viewContext.save()
@@ -34,6 +32,7 @@ struct PersistenceController {
 
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name: "CoreDataSwiftUISandbox")
+        container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

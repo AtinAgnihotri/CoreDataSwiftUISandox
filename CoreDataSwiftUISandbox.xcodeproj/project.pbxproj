@@ -15,8 +15,6 @@
 		857938DC26872FFA00AAC115 /* CoreDataSwiftUISandbox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 857938DA26872FFA00AAC115 /* CoreDataSwiftUISandbox.xcdatamodeld */; };
 		857938E726872FFA00AAC115 /* CoreDataSwiftUISandboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857938E626872FFA00AAC115 /* CoreDataSwiftUISandboxTests.swift */; };
 		857938F226872FFA00AAC115 /* CoreDataSwiftUISandboxUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857938F126872FFA00AAC115 /* CoreDataSwiftUISandboxUITests.swift */; };
-		858CA5FD268B948100C76C00 /* Movie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858CA5FB268B948100C76C00 /* Movie+CoreDataClass.swift */; };
-		858CA5FE268B948100C76C00 /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858CA5FC268B948100C76C00 /* Movie+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,8 +49,6 @@
 		857938ED26872FFA00AAC115 /* CoreDataSwiftUISandboxUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataSwiftUISandboxUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		857938F126872FFA00AAC115 /* CoreDataSwiftUISandboxUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSwiftUISandboxUITests.swift; sourceTree = "<group>"; };
 		857938F326872FFA00AAC115 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		858CA5FB268B948100C76C00 /* Movie+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataClass.swift"; sourceTree = "<group>"; };
-		858CA5FC268B948100C76C00 /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +99,6 @@
 		857938CE26872FF500AAC115 /* CoreDataSwiftUISandbox */ = {
 			isa = PBXGroup;
 			children = (
-				858CA5FB268B948100C76C00 /* Movie+CoreDataClass.swift */,
-				858CA5FC268B948100C76C00 /* Movie+CoreDataProperties.swift */,
 				857938CF26872FF500AAC115 /* CoreDataSwiftUISandboxApp.swift */,
 				857938D126872FF500AAC115 /* ContentView.swift */,
 				857938D326872FFA00AAC115 /* Assets.xcassets */,
@@ -274,8 +268,6 @@
 				857938DC26872FFA00AAC115 /* CoreDataSwiftUISandbox.xcdatamodeld in Sources */,
 				857938D926872FFA00AAC115 /* Persistence.swift in Sources */,
 				857938D226872FF500AAC115 /* ContentView.swift in Sources */,
-				858CA5FD268B948100C76C00 /* Movie+CoreDataClass.swift in Sources */,
-				858CA5FE268B948100C76C00 /* Movie+CoreDataProperties.swift in Sources */,
 				857938D026872FF500AAC115 /* CoreDataSwiftUISandboxApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

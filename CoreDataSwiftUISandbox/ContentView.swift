@@ -15,20 +15,28 @@ struct Student: Hashable {
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @FetchRequest(
+    @FetchRequest(entity: Wizard.entity(),
         sortDescriptors: [],
         animation: .default)
-    private var items: FetchedResults<Movie>
+    private var wizards: FetchedResults<Wizard>
     let students = [Student(name: "Harry Potter"), Student(name: "Hermoine Granger"), Student(name: "Ron Weasely")]
 
     var body: some View {
         VStack {
-            List (students, id:\.self) { student in
-                Text(student.name)
+            List (wizards, id:\.self) { wizard in
+                Text(wizard.name ?? "Unknown")
+            }
+            Button("Add") {
+                let wizard = Wizard(context: viewContext)
+                wizard.name = "Harry Potter"
             }
             Button("Save") {
-                if self.viewContext.hasChanges {
-                    try? self.viewContext.save()
+                do {
+                    if self.viewContext.hasChanges {
+                        try self.viewContext.save()
+                    }
+                } catch {
+                    print(error.localizedDescription)
                 }
             }
         }
