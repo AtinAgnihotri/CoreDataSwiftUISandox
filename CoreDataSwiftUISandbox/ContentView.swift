@@ -14,52 +14,59 @@ struct Student: Hashable {
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(entity: Ship.entity(),
-        sortDescriptors: [],
-//        predicate: NSPredicate(format: "universe == 'Expanse'"),
-//        predicate: NSPredicate(format: "universe==%@", "Mass Effect", "Expanse"),
-        predicate: NSPredicate(format: "universe in %@", ["Mass Effect", "Expanse"]),
-//        predicate: NSPredicate(format: "name BEGINSWITH %@", "S"),
-//        predicate: NSPredicate(format: "name BEGINSWITH[c] %@", "S"),
-//        predicate: NSPredicate(format: "NOT name BEGINSWITH %@", "S"),
-        //CONTAINS[c]
-        animation: .default)
-    private var ships: FetchedResults<Ship>
+    @State var lastNameFilter = "A"
+//    @FetchRequest(entity: Singer.entity(),
+//        sortDescriptors: [],
+////        predicate: NSPredicate(format: "universe == 'Expanse'"),
+////        predicate: NSPredicate(format: "universe==%@", "Mass Effect", "Expanse"),
+////        predicate: NSPredicate(format: "name BEGINSWITH %@", "S"),
+////        predicate: NSPredicate(format: "name BEGINSWITH[c] %@", "S"),
+////        predicate: NSPredicate(format: "NOT name BEGINSWITH %@", "S"),
+//        //CONTAINS[c]
+//        animation: .default)
+//    private var singers: FetchedResults<Singer>
     let students = [Student(name: "Harry Potter"), Student(name: "Hermoine Granger"), Student(name: "Ron Weasely")]
 
     var body: some View {
         VStack {
-            List (ships, id:\.self) { ship in
-                Text(ship.name ?? "Unknown Ship")
+//            List (singers, id:\.self) { singer in
+//                Text("\(singer.wrappedFirstName) \(singer.wrappedLastName)")
+//            }
+            FilteredList(key: "lastName", value: lastNameFilter) { (singer: Singer) in
+                Text("\(singer.wrappedFirstName) \(singer.wrappedLastName)")
             }
             Button("Add Examples") {
-                let ship1 = Ship(context: viewContext)
-                ship1.name = "SSV Normandy SR-1"
-                ship1.universe = "Mass Effect"
+                let singer1 = Singer(context: self.viewContext)
+                singer1.firstName = "Tove"
+                singer1.lastName = "Lo"
                 
-                let ship2 = Ship(context: viewContext)
-                ship2.name = "Rocinante"
-                ship2.universe = "Expanse"
+                let singer2 = Singer(context: self.viewContext)
+                singer2.firstName = "Marshall"
+                singer2.lastName = "Mathers"
                 
-                let ship3 = Ship(context: viewContext)
-                ship3.name = "Millenium Falcon"
-                ship3.universe = "Star Wars"
+                let singer3 = Singer(context: self.viewContext)
+                singer3.firstName = "Austin"
+                singer3.lastName = "Post"
                 
-                let ship4 = Ship(context: viewContext)
-                ship4.name = "Starship Enterprise"
-                ship4.universe = "Star Wars"
+                let singer4 = Singer(context: self.viewContext)
+                singer4.firstName = "Kendrick"
+                singer4.lastName = "Lamar"
+                
+                let singer5 = Singer(context: self.viewContext)
+                singer5.firstName = "Amit"
+                singer5.lastName = "Trivedi"
+                
+                let singer6 = Singer(context: self.viewContext)
+                singer6.firstName = "Tina"
+                singer6.lastName = "Turner"
                 
                 try? self.viewContext.save()
             }
-            Button("Save") {
-                do {
-                    if self.viewContext.hasChanges {
-                        try self.viewContext.save()
-                    }
-                } catch {
-                    print(error.localizedDescription)
-                }
+            Button("Show T") {
+                lastNameFilter = "T"
+            }
+            Button("Show L") {
+                lastNameFilter = "L"
             }
         }
         /*
