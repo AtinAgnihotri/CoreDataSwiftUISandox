@@ -14,9 +14,11 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newItem = Singer(context: viewContext)
-            newItem.firstName = ""
-            newItem.lastName = ""
+            let newCandy = Candy(context: viewContext)
+            newCandy.name = ""
+            let newCountry = Country(context: viewContext)
+            newCountry.fullName = ""
+            newCountry.shortName = ""
         }
         do {
             try viewContext.save()
